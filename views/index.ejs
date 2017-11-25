@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+      <!-- Include external CSS. -->
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css">
+
+      <!-- Include Editor style. -->
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.7.2/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.7.2/css/froala_style.min.css" rel="stylesheet" type="text/css" />
+
+      <!-- Create a tag that we will use as the editable area. -->
+      <!-- You can use a div tag as well. -->
+
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <script>
+          var category = ["Health Plus","LifeStyle","Family","Health Touch"];
+          var subCategory = [
+              ["Common Disease","common conditions","",""],
+              ["Fitness","Dental","Nutrition","Relationship/Sex"],
+              ["Pregnancy","Parenting Guide","",""],
+              ["","","","",""]
+          ];
+
+          function myfunction(arg_val){
+          document.getElementById("navbar").style.display = "none";
+
+              var ele_id = document.getElementById("categorydiv");
+              document.getElementById("cat").innerHTML = category[arg_val[0]];
+              document.getElementById("subcat").innerHTML = subCategory[arg_val[0]][arg_val[1]];
+              ele_id.style.display = "block";
+          }
+          // hiding category division on load
+          $(document).ready(function () {
+              $("#categorydiv").hide();
+          });
+      </script>
+      <script>
+          $(function() {
+              $('#edit').froalaEditor()
+          });
+      </script>
+
+  </head>
+  <body>
+  <!-- Include external JS libs. -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script>
+
+  <!-- Include Editor JS files. -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.7.2/js/froala_editor.pkgd.min.js"></script>
+  <!--******* Editor Ends HERE *****-->
+
+
+    <nav class="navbar navbar-inverse" id="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">BetterYou</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Health Plus
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" id ="00" onclick="myfunction('00')">Common Disease</a></li>
+                        <li><a href="#" id ="01" onclick="myfunction('01')">common conditions</a></li>
+                        <li><a href="#" id ="02" onclick="myfunction('02')">Page 1-3</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Lifestyle
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" id ="10" onclick="myfunction('10')">Fitness</a></li>
+                        <li><a href="#" id ="12" onclick="myfunction('11')">Dental</a></li>
+                        <li><a href="#" id ="13" onclick="myfunction('12')">Nutrition</a></li>
+                        <li><a href="#" id ="14" onclick="myfunction('13')">Relationship/Sex</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Parenting guide
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" id ="20" onclick="myfunction('20')">Pregnanacy</a></li>
+                        <li><a href="#" id ="21" onclick="myfunction('21')">Parenting Guide</a></li>
+                        <li><a href="#" id ="22" onclick="myfunction('22')">Page 1-3</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Health Touch
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" id ="30" onclick="myfunction('30')">Page 1-1</a></li>
+                        <li><a href="#" id ="31" onclick="myfunction('31')">Page 1-2</a></li>
+                        <li><a href="#" id ="32" onclick="myfunction('32')">Page 1-3</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+
+    <div id="categorydiv">
+        Category: <p id="cat"></p>
+        Subcategory: <p id ="subcat"></p>
+        <textarea id="edit" name="content"></textarea>
+    </div>
+
+  </body>
+</html>
