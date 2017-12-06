@@ -14,8 +14,25 @@
       <!-- You can use a div tag as well. -->
 
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <script src="https://www.gstatic.com/firebasejs/4.7.0/firebase.js"></script>
+
+
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+      <script src="https://www.gstatic.com/firebasejs/4.7.0/firebase.js"></script>
+      <script>
+          // Initialize Firebase
+          var config = {
+              apiKey: "AIzaSyDTrGoj5UKRFLyMbJLZJcYnYfCsXO5uMMg",
+              authDomain: "betteryou-39423.firebaseapp.com",
+              databaseURL: "https://betteryou-39423.firebaseio.com",
+              projectId: "betteryou-39423",
+              storageBucket: "betteryou-39423.appspot.com",
+              messagingSenderId: "109119518880"
+          };
+          firebase.initializeApp(config);
+      </script>
       <script>
           var category = ["Health Plus","LifeStyle","Family","Health Touch"];
           var subCategory = [
@@ -40,8 +57,40 @@
       </script>
       <script>
           $(function() {
-              $('#edit').froalaEditor()
+              $('#myEditor')
+                  .froalaEditor({
+                      // Set the save param.
+                      saveParam: 'content',
+                      saveInterval: 25000000000000000000000000000,
+
+                      iframe: true,
+                      // Set the save URL.
+                     // saveURL: 'https://betteryou-39423.firebaseio.com/',
+
+                      // HTTP request type.
+                      saveMethod: 'POST',
+
+                      // Additional save params.
+                      saveParams: {id: 'my_editor'}
+                  })
+                  .on('froalaEditor.save.before', function (e, editor) {
+                      var cat = document.getElementById("cat").innerHTML;
+                      var subcat = document.getElementById("subcat").innerHTML;
+                      alert(editor.html.get());
+                      firebase.database().ref(cat).child(subcat).push(editor.html.get());
+                  })
+                  .on('froalaEditor.save.after', function (e, editor, response) {
+                      alert('Successfully saved');
+                  })
+                  .on('froalaEditor.save.error', function (e, editor, error) {
+                      alert('There is rror in saving data. TRY AGAIN');
+                  })
           });
+
+          $('#saveButton').click (function () {
+              $('#myEditor').froalaEditor('save.save');
+              $('')
+          })
       </script>
 
   </head>
@@ -108,8 +157,13 @@
     <div id="categorydiv">
         Category: <p id="cat"></p>
         Subcategory: <p id ="subcat"></p>
-        <textarea id="edit" name="content"></textarea>
+        <div id="myEditor">
+
+        </div>
+        <button id="saveButton">Save</button>
+
     </div>
+
 
   </body>
 </html>
