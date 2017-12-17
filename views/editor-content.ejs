@@ -1,0 +1,111 @@
+<html>
+<head>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <!-- Include external CSS. -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css">
+
+    <!-- Include Editor style. -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.7.2/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.7.2/css/froala_style.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- Create a tag that we will use as the editable area. -->
+    <!-- You can use a div tag as well. -->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://www.gstatic.com/firebasejs/4.7.0/firebase.js"></script>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/4.7.0/firebase.js"></script>
+    <!-- Include external JS libs. -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script>
+
+    <!-- Include Editor JS files. -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.7.2/js/froala_editor.pkgd.min.js"></script>
+    <!--******* Editor Ends HERE *****-->
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyDTrGoj5UKRFLyMbJLZJcYnYfCsXO5uMMg",
+            authDomain: "betteryou-39423.firebaseapp.com",
+            databaseURL: "https://betteryou-39423.firebaseio.com",
+            projectId: "betteryou-39423",
+            storageBucket: "betteryou-39423.appspot.com",
+            messagingSenderId: "109119518880"
+        };
+        firebase.initializeApp(config);
+        var storage = firebase.storage().ref().child('images');
+    </script>
+
+
+
+
+
+    <script>
+        $('#myEditor').on('froalaEditor.video.inserted', function (e, editor, $video) {
+            var videoSource = $video.contents().get(0).src;
+            $video.html('<div class="row"><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><div class="embed-responsive embed-responsive-4by3"><iframe class="embed-responsive-item" src="' + videoSource +'" frameborder="0" allowfullscreen></iframe></div></div></div>');
+        });
+        $(function() {
+            $('#myEditor')
+                .froalaEditor({
+                    // Set the save param.
+                    autosave: false,
+                    saveParam: 'content',
+                    videoResize: true,
+                    iframe: true,
+                    // Set the save URL.
+                    // saveURL: 'https://betteryou-39423.firebaseio.com/',
+
+                    // HTTP request type.
+                    saveMethod: 'POST',
+
+                    // Additional save params.
+                    saveParams: {id: 'my_editor'}
+                })
+
+                .on('froalaEditor.save.before', function (e, editor) {
+                    var cat = document.getElementById("cat").value;
+                    var subcat = document.getElementById("subcat").value;
+                    var imageurl = document.getElementById("url").value;
+                    var title = document.getElementById("title").value;
+                    var tags = document.getElementById("tage").value;
+                    alert(cat+subcat+title+imageurl+tags);
+                    firebase.database().ref(cat).child(subcat).push(editor.html.get());
+                })
+                .on('froalaEditor.save.after', function (e, editor, response) {
+                    alert('Successfully saved');
+                })
+                .on('froalaEditor.save.error', function (e, editor, error) {
+                    alert('There is rror in saving data. TRY AGAIN');
+                })
+        });
+
+        $('#saveButton').click (function () {
+            $('#myEditor').froalaEditor('save.save');
+            $.ajax({
+               type: "POST"
+            });
+        });
+
+    </script>
+
+</head>
+<body>
+<input type="text" id="cat" value="<%=cat%>" >
+<input type="text" id="subcat" value="<%=subcat%>" >
+<input type="hidden"id="url" value="<%=url%> ">
+<br>
+<br>
+<div id="myEditor">
+
+</div>
+<button id="saveButtom"> Save</button>
+
+</body>
+</html>
