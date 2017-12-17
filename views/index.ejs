@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
   <head>
     <link rel='stylesheet' href='/stylesheets/style.css' />
       <!-- Include external CSS. -->
@@ -32,68 +33,34 @@
               messagingSenderId: "109119518880"
           };
           firebase.initializeApp(config);
+          var storage = firebase.storage().ref().child('images');
       </script>
+
       <script>
-          var category = ["Health Plus","LifeStyle","Family","Health Touch"];
+          var category = ["Health Plus","Life Style","Family","Health Touch"];
           var subCategory = [
-              ["Common Disease","common conditions","",""],
+              ["Common Disease","Common Conditions","",""],
               ["Fitness","Dental","Nutrition","Relationship/Sex"],
               ["Pregnancy","Parenting Guide","",""],
               ["","","","",""]
           ];
 
           function myfunction(arg_val){
-          document.getElementById("navbar").style.display = "none";
+          //document.getElementById("navbar").style.display = "none";
 
               var ele_id = document.getElementById("categorydiv");
-              document.getElementById("cat").innerHTML = category[arg_val[0]];
-              document.getElementById("subcat").innerHTML = subCategory[arg_val[0]][arg_val[1]];
-              ele_id.style.display = "block";
+              document.getElementById("cat").value = category[arg_val[0]];
+              document.getElementById("subcat").value = subCategory[arg_val[0]][arg_val[1]];
+              //ele_id.style.display = "block";
           }
-          // hiding category division on load
-          $(document).ready(function () {
-              $("#categorydiv").hide();
-          });
+
       </script>
-      <script>
-          $(function() {
-              $('#myEditor')
-                  .froalaEditor({
-                      // Set the save param.
-                      saveParam: 'content',
-                      saveInterval: 25000000000000000000000000000,
 
-                      iframe: true,
-                      // Set the save URL.
-                     // saveURL: 'https://betteryou-39423.firebaseio.com/',
 
-                      // HTTP request type.
-                      saveMethod: 'POST',
 
-                      // Additional save params.
-                      saveParams: {id: 'my_editor'}
-                  })
-                  .on('froalaEditor.save.before', function (e, editor) {
-                      var cat = document.getElementById("cat").innerHTML;
-                      var subcat = document.getElementById("subcat").innerHTML;
-                      alert(editor.html.get());
-                      firebase.database().ref(cat).child(subcat).push(editor.html.get());
-                  })
-                  .on('froalaEditor.save.after', function (e, editor, response) {
-                      alert('Successfully saved');
-                  })
-                  .on('froalaEditor.save.error', function (e, editor, error) {
-                      alert('There is rror in saving data. TRY AGAIN');
-                  })
-          });
-
-          $('#saveButton').click (function () {
-              $('#myEditor').froalaEditor('save.save');
-              $('')
-          })
-      </script>
 
   </head>
+
   <body>
   <!-- Include external JS libs. -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -155,15 +122,25 @@
     </nav>
 
     <div id="categorydiv">
-        Category: <p id="cat"></p>
-        Subcategory: <p id ="subcat"></p>
-        <div id="myEditor">
 
-        </div>
-        <button id="saveButton">Save</button>
+        <form id="category-form" name="category-form" action="/upload" method="post" enctype="multipart/form-data">
+            CATEGORY:<input type="text" value="" id="cat" name="cat"></input><br>
+            SUBCATEGORY: <input type="text" value="" id="subcat" name="subcat"></input>
 
+            tag1 :<input type="text" name="text1" value=""><br>
+            tag2 : <input type="checkbox" name="" value="">
+            tag3 :<input type="checkbox" name="" value="">
+            tag4 :<input type="checkbox" name="" value="">
+
+            <input type="file" name="image" id="image">
+            <br>
+            <button type="submit">Submit</button>
+        </form>
+        <br>
     </div>
 
 
+
   </body>
+
 </html>

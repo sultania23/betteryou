@@ -5,9 +5,11 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var firebase = require('firebase');
+var multer = require('multer');
+var upload = multer({ dest: 'uploads/' });
 var index = require('./routes/index');
 var users = require('./routes/users');
-
+var Busboy = require('busboy');
 var app = express();
 
 // view engine setup
@@ -42,5 +44,14 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+var config = {
+    apiKey: "AIzaSyDTrGoj5UKRFLyMbJLZJcYnYfCsXO5uMMg",
+    authDomain: "betteryou-39423.firebaseapp.com",
+    databaseURL: "https://betteryou-39423.firebaseio.com",
+    projectId: "betteryou-39423",
+    storageBucket: "betteryou-39423.appspot.com",
+    messagingSenderId: "109119518880"
+};
+firebase.initializeApp(config);
 
 module.exports = app;
