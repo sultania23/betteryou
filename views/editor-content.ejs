@@ -73,9 +73,8 @@
                     var cat = document.getElementById("cat").value;
                     var subcat = document.getElementById("subcat").value;
                     var imageurl = document.getElementById("url").value;
-                    var title = document.getElementById("title").value;
-                    var tags = document.getElementById("tage").value;
-                    alert(cat+subcat+title+imageurl+tags);
+
+
                     firebase.database().ref(cat).child(subcat).push(editor.html.get());
                 })
                 .on('froalaEditor.save.after', function (e, editor, response) {
@@ -88,9 +87,6 @@
 
         $('#saveButton').click (function () {
             $('#myEditor').froalaEditor('save.save');
-            $.ajax({
-               type: "POST"
-            });
         });
 
     </script>
