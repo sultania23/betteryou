@@ -75,10 +75,11 @@
                     var imageurl = document.getElementById("url").value;
                     var title = document.getElementById("title").value;
                     var tags = document.getElementById("tags").value;
+                    var time = document.getElementById("time").value;
 
 
                     firebase.database().ref(cat).child(subcat).push({
-                        imgurl:imageurl,upvotes:0,downvotes:0,title:title,tags:tags
+                        imgurl:imageurl,upvotes:0,downvotes:0,title:title,tags:tags,time:time,story:editor.html().get()
                     });
                 })
                 .on('froalaEditor.save.after', function (e, editor, response) {
@@ -102,6 +103,7 @@
 <input type="hidden"id="url" value="<%=url%> ">
 <input type="hidden"id="title" value="<%=title%> ">
 <input type="hidden"id="tags" value="<%=tags%> ">
+<input type="hidden" id="time" value="<%=time%>">
 <br>
 <br>
 <div id="myEditor">

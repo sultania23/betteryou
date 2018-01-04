@@ -25,7 +25,8 @@ router.post('/upload',upload.any(),function (req,res) {
             subcat: req.body.subcat,
             url: url,
             title:req.body.title,
-            tags:req.body.tags
+            tags:req.body.tags,
+            time:req.body.time
         };
         //
         res.render('editor-content.ejs',data);
