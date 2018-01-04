@@ -23,8 +23,10 @@ router.post('/upload',upload.any(),function (req,res) {
         var data = {
             cat: req.body.cat,
             subcat: req.body.subcat,
-            url: url
-        }
+            url: url,
+            title:title,
+            tags:tags
+        };
         //
         res.render('editor-content.ejs',data);
     }

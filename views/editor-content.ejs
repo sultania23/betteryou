@@ -73,9 +73,13 @@
                     var cat = document.getElementById("cat").value;
                     var subcat = document.getElementById("subcat").value;
                     var imageurl = document.getElementById("url").value;
+                    var title = document.getElementById("title").value;
+                    var tags = document.getElementById("tags").value;
 
 
-                    firebase.database().ref(cat).child(subcat).push(editor.html.get());
+                    firebase.database().ref(cat).child(subcat).push({
+                        imgurl:imageurl,upvotes:0,downvotes:0,title:title,tags:tags
+                    });
                 })
                 .on('froalaEditor.save.after', function (e, editor, response) {
                     alert('Successfully saved');
@@ -96,6 +100,8 @@
 <input type="text" id="cat" value="<%=cat%>" >
 <input type="text" id="subcat" value="<%=subcat%>" >
 <input type="hidden"id="url" value="<%=url%> ">
+<input type="hidden"id="title" value="<%=title%> ">
+<input type="hidden"id="tags" value="<%=tags%> ">
 <br>
 <br>
 <div id="myEditor">
