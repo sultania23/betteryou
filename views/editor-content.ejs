@@ -79,7 +79,7 @@
 
 
                     firebase.database().ref(cat).child(subcat).push({
-                        imgurl:imageurl,upvotes:0,downvotes:0,title:title,tags:tags,time:time,story:editor.html().get()
+                        imgurl:imageurl,upvotes:0,downvotes:0,title:title,tags:tags,time:time,story:editor.html.get()
                     });
                 })
                 .on('froalaEditor.save.after', function (e, editor, response) {
