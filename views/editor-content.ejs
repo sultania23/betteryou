@@ -39,11 +39,7 @@
             messagingSenderId: "109119518880"
         };
         firebase.initializeApp(config);
-        var storage = firebase.storage().ref().child('images');
     </script>
-
-
-
 
 
     <script>
@@ -77,11 +73,11 @@
                     var tags = document.getElementById("tags").value;
                     var time = document.getElementById("time").value;
 
-
                     firebase.database().ref(cat).child(subcat).push({
                         imgurl:imageurl,upvotes:0,downvotes:0,title:title,tags:tags,time:time,story:editor.html.get()
                     });
                 })
+
                 .on('froalaEditor.save.after', function (e, editor, response) {
                     alert('Successfully saved');
                 })
@@ -100,7 +96,7 @@
 <body>
 <input type="text" id="cat" value="<%=cat%>" >
 <input type="text" id="subcat" value="<%=subcat%>" >
-<input type="hidden"id="url" value="<%=url%> ">
+<input type="imag4 "id="url" value="<%= url %>" onclick="getimage()">
 <input type="hidden"id="title" value="<%=title%> ">
 <input type="hidden"id="tags" value="<%=tags%> ">
 <input type="hidden" id="time" value="<%=time%>">
