@@ -5,8 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var firebase = require('firebase');
-var multer = require('multer');
-var upload = multer({ dest: 'uploads/' });
+
 var index = require('./routes/index');
 var users = require('./routes/users');
 var Busboy = require('busboy');

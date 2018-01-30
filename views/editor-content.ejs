@@ -39,7 +39,7 @@
             messagingSenderId: "109119518880"
         };
         firebase.initializeApp(config);
-        var storage = firebase.storage().ref().child('images');
+       // var storage = firebase.storage().ref().child('images');
     </script>
 
 
@@ -100,16 +100,16 @@
 <body>
 <input type="text" id="cat" value="<%=cat%>" >
 <input type="text" id="subcat" value="<%=subcat%>" >
-<input type="hidden"id="url" value="<%=url%> ">
-<input type="hidden"id="title" value="<%=title%> ">
-<input type="hidden"id="tags" value="<%=tags%> ">
+<input type="hidden" id="url" value="<%=url%> ">
+<input type="hidden" id="title" value="<%=title%> ">
+<input type="hidden" id="tags" value="<%=tags%> ">
 <input type="hidden" id="time" value="<%=time%>">
 <br>
 <br>
 <div id="myEditor">
 
 </div>
-<button id="saveButtom"> Save</button>
+<button id="saveButton"> Save</button>
 
 </body>
 </html>

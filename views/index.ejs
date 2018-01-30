@@ -123,15 +123,15 @@
 
     <div id="categorydiv">
 
-        <form id="category-form" name="category-form" action="/upload" method="post" enctype="multipart/form-data">
+        <form id="category-form" name="category-form" action="/" method="POST" >
+
             CATEGORY:<input type="text" value="" id="cat" name="cat"></input><br>
             SUBCATEGORY: <input type="text" value="" id="subcat" name="subcat"></input>
-
-            tag :<input type="text" name="tags" id="tags" value=""><br>
+            tag : <input type="text" name="tags" id="tags" value=""><br>
             title : <input type="text" name="title" id="title" value=""><br>
             time : <input type="text" name="time" id="time" value=""><br>
+            Add Image Link : <input type="text" name="image" id="image"  value="">
 
-            <input type="file" name="image" id="image">
             <br>
             <button type="submit">Submit</button>
         </form>
