@@ -21,7 +21,7 @@ router.post('/',function (req,res) {
             tags:req.body.tags,
             time:req.body.time
         };
-        console.log(data);
+       // console.log(data);
         //
         res.render('editor-content.ejs',data);
 

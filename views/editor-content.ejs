@@ -60,7 +60,7 @@
                     videoResize: true,
                     iframe: true,
                     // Set the save URL.
-                    // saveURL: 'https://betteryou-39423.firebaseio.com/',
+                     saveURL: '',
 
                     // HTTP request type.
                     saveMethod: 'POST',
@@ -86,7 +86,8 @@
                     alert('Successfully saved');
                 })
                 .on('froalaEditor.save.error', function (e, editor, error) {
-                    alert('There is rror in saving data. TRY AGAIN');
+
+                    alert('ok ');
                 })
         });
 
