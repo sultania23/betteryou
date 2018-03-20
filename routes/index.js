@@ -7,6 +7,10 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+
+router.get('/addnewad',function (req,res,next) {
+    res.render('addnewad');
+});
 router.post('/',function (req,res) {
 
 
@@ -26,4 +30,8 @@ router.post('/',function (req,res) {
         res.render('editor-content.ejs',data);
 
 });
+
+
+
+
 module.exports = router;

@@ -1,9 +1,17 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+router.post('/',function (req,res) {
 
+
+//res.writeHead(200, {"Content-Type": "application/json"});
+//res.send(req.body.cat);
+//var url = firebase.database().ref('images').push(req.files);
+var data = req.body.data;
+console.log(data);
+//
+res.send('saved');
+res.end();
+
+});
 module.exports = router;

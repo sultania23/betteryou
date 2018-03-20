@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <!-- Include external CSS. -->
+
+
+    <script src="https://www.gstatic.com/firebasejs/4.7.0/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyDTrGoj5UKRFLyMbJLZJcYnYfCsXO5uMMg",
+            authDomain: "betteryou-39423.firebaseapp.com",
+            databaseURL: "https://betteryou-39423.firebaseio.com",
+            projectId: "betteryou-39423",
+            storageBucket: "betteryou-39423.appspot.com",
+            messagingSenderId: "109119518880"
+        };
+        firebase.initializeApp(config);
+
+        function guid() {
+            function s4() {
+                return Math.floor((1 + Math.random()) * 0x10000)
+                    .toString(16)
+                    .substring(1);
+            }
+            return  s4() + '-' + s4() + '-' + s4();
+        }
+
+        function saveNewAdd() {
+
+            var name = document.getElementById('ad_name').value;
+            var time = document.getElementById('ad_time').value;
+            var url = document.getElementById('ad_url').value;
+
+            var id = guid();
+
+            var db = firebase.database().ref('/better_adds');
+
+            var yes = db.push({name:name,time:time,url:url,id:id});
+            alert(yes);
+        }
+
+
+    </script>
+
+
+
+
+
+
+</head>
+
+<body>
+
+<div id="addiv">
+
+    <form id="ads-form" name="ads-form" action="#" onsubmit="saveNewAdd();" >
+
+
+        Name : <input type="text" value="" id="ad_name" name="ad_name"><br/>
+        Time : <input type="text" name="ad_time" id="ad_time" value=""><br>
+        URL : <input type="text" name="ad_url" id="ad_url" value=""><br>
+
+
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+    <br>
+</div>
+
+
+
+</body>
+
+</html>

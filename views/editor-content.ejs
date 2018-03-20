@@ -56,17 +56,18 @@
                 .froalaEditor({
                     // Set the save param.
                     autosave: false,
+                    saveInterval: 2500000000000000000,
                     saveParam: 'content',
                     videoResize: true,
                     iframe: true,
                     // Set the save URL.
-                     saveURL: '',
+                     saveURL: '/savepost',
 
                     // HTTP request type.
                     saveMethod: 'POST',
 
                     // Additional save params.
-                    saveParams: {id: 'my_editor'}
+                    saveParams: {data: 'my_editor'}
                 })
 
                 .on('froalaEditor.save.before', function (e, editor) {
@@ -87,12 +88,21 @@
                 })
                 .on('froalaEditor.save.error', function (e, editor, error) {
 
-                    alert('ok ');
+                    alert('error hai yha pe');
                 })
         });
 
+
+        window.onload = function () {
+            document.getElementById('saveButton').addEventListener('click',function (evt) {
+                alert('clicked');
+                $('#myEditor').froalaEditor('save.save');
+            });
+        };
         $('#saveButton').click (function () {
+            console.log('Clicked');
             $('#myEditor').froalaEditor('save.save');
+
         });
 
     </script>
